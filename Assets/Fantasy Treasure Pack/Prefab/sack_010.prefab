@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4077449151683048}
   - component: {fileID: 33486502677374928}
   - component: {fileID: 23403615018451968}
+  - component: {fileID: 1738322086690353378}
   m_Layer: 0
   m_Name: sack_010
   m_TagString: Untagged
@@ -83,6 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1738322086690353378
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916457160753674}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15298319, y: 0.21562506, z: 0.16654572}
+  m_Center: {x: 0.010301728, y: 0.10678055, z: -0.002133023}
 --- !u!1 &1947216925010022
 GameObject:
   m_ObjectHideFlags: 0
