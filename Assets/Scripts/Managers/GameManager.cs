@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Tooltip("Amount of lives left")]
-    public byte livesLeft = 3;
+    [Tooltip("Amount of lives left")] public byte livesLeft = 3;
     public GameObject player;
-    
+
     private static GameManager _instance = null;
+
     public static GameManager instance
     {
         get
@@ -16,27 +16,19 @@ public class GameManager : MonoBehaviour
             if (!_instance) _instance = FindObjectOfType<GameManager>();
             return _instance;
         }
-        private set
-        {
-            _instance = value;
-        }
+        private set { _instance = value; }
     }
-    
-    // Events
-    public delegate void PlayerLivesEvent();
-    public event PlayerLivesEvent OnPlayerLivesUpdate;
-    
+
     // Start is called before the first frame update
     void Start()
     {
         if (player == null) player = GameObject.FindGameObjectWithTag("Player");
-        PlayerController.instance.OnPlayerLivesUpdate += RemoveLife;
+        PlayerController.instance.OnPlayerGotHit += RemoveLife;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     /**
@@ -44,8 +36,11 @@ public class GameManager : MonoBehaviour
      */
     public void RemoveLife()
     {
-        livesLeft -= 1;
-        checkForGameOver();
+        if (livesLeft > 0)
+        {
+            livesLeft -= 1;
+            checkForGameOver();
+        }
     }
 
     /**
