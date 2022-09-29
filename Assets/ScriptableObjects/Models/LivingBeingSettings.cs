@@ -6,6 +6,5 @@ using UnityEngine;
 public class LivingBeingSettings : ScriptableObject
 {
     public float speed = 1.0f;
-    public float jumpForce = 10f;
     public bool killOnTouch = false;
 }

@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
             _instance = value;
         }
     }
+    
+    // Events
+    public delegate void PlayerLivesEvent();
+    public event PlayerLivesEvent OnPlayerLivesUpdate;
 
     private void Start()
     {
@@ -53,5 +57,16 @@ public class PlayerController : MonoBehaviour
     private void RotatePlayer(float rotation)
     {
         this.transform.Rotate(0, rotation * rotationSpeed * Time.deltaTime, 0);
+    }
+    
+    /**
+     * Detects collision
+     */
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Enemy")
+        {
+            this.OnPlayerLivesUpdate.Invoke();
+        }
     }
 }
