@@ -20,6 +20,8 @@ public class LevelManager : MonoBehaviour
     }
     public delegate void LevelLaunch(int levelId);
     public event LevelLaunch OnLevelLaunch;
+    public delegate void LevelReset();
+    public event LevelReset OnLevelReset;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,8 +50,12 @@ public class LevelManager : MonoBehaviour
         this.LaunchLevel(3);
     }
 
-    void LaunchLevel(int levelId)
+    public void LaunchLevel(int levelId)
     {
-        OnLevelLaunch.Invoke(levelId);
+        this.OnLevelLaunch.Invoke(levelId);
+    }
+    public void ResetLevel()
+    {
+        this.OnLevelReset.Invoke();
     }
 }

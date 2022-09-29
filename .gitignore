@@ -72,4 +72,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 #project version file
-/ProjectSettings/ProjectVersion*
+Packages/packages-lock.json
+ProjectSettings/ProjectVersion.txt

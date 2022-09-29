@@ -23,6 +23,8 @@ public class GuiManager : MonoBehaviour
     public TextMeshProUGUI livesLeftText;
     public GameObject lifeLayout;
     public Sprite lifeHeartSprite;
+    public GameObject levelSelector;
+    public GameObject backButton;
     
     // Start is called before the first frame update
     void Start()
@@ -36,12 +38,28 @@ public class GuiManager : MonoBehaviour
         
     }
 
+    void OnEnable()
+    {
+        LevelManager.Instance.OnLevelLaunch += HideMenu;
+        LevelManager.Instance.OnLevelReset += DisplayMenu;
+    }
+
     /**
      * Updates the number of lives left on GUI
      */
     private void UpdateLivesLeft()
     {
         livesLeftText.text = "Life : " + GameManager.instance.livesLeft;
-        
+    }
+
+    private void DisplayMenu()
+    {
+        levelSelector.SetActive(true);
+        backButton.SetActive(false);
+    }
+    private void HideMenu(int levelId)
+    {
+        levelSelector.SetActive(false);
+        backButton.SetActive(true);
     }
 }
