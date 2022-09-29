@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae45fa2ceec79d24a9d86969a47beb94, type: 3}
   m_Name: BaseWall
   m_EditorClassIdentifier: 
-  Material: {fileID: 2100000, guid: 637c81835033b5645b0fa61427657b12, type: 2}
+  Material: {fileID: 2100000, guid: e3734bc969b8de946a0d1e774140e3c4, type: 2}
