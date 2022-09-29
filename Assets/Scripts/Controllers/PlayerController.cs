@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 _direction;
     private Vector3 _rotation;
 
+    private bool _playerInvicible = false;
+
     private static PlayerController _instance = null;
     public static PlayerController instance
     {
@@ -27,8 +29,8 @@ public class PlayerController : MonoBehaviour
     }
     
     // Events
-    public delegate void PlayerLivesEvent();
-    public event PlayerLivesEvent OnPlayerLivesUpdate;
+    public delegate void PlayerLifeEvent();
+    public event PlayerLifeEvent OnPlayerGotHit;
 
     private void Start()
     {
@@ -64,9 +66,21 @@ public class PlayerController : MonoBehaviour
      */
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Enemy")
+        if (collision.transform.tag == "Enemy" && !_playerInvicible)
         {
-            this.OnPlayerLivesUpdate.Invoke();
+            this.OnPlayerGotHit.Invoke();
+            _playerInvicible = true;
+            print("player got hit");
+            StartCoroutine(PlayerInvicibilityTime());
         }
+    }
+
+    /**
+     * Prevents the player from taking damage for a specified amount of seconds
+     */
+    IEnumerator PlayerInvicibilityTime()
+    {
+        yield return new WaitForSeconds(2);
+        this._playerInvicible = false;
     }
 }

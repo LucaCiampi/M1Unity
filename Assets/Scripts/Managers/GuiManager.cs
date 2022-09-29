@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GuiManager : MonoBehaviour
@@ -20,11 +21,13 @@ public class GuiManager : MonoBehaviour
     }
 
     public TextMeshProUGUI livesLeftText;
+    public GameObject lifeLayout;
+    public Sprite lifeHeartSprite;
     
     // Start is called before the first frame update
     void Start()
     {
-        PlayerController.instance.OnPlayerLivesUpdate += UpdateLivesLeft;
+        PlayerController.instance.OnPlayerGotHit += UpdateLivesLeft;
     }
 
     // Update is called once per frame
@@ -33,8 +36,12 @@ public class GuiManager : MonoBehaviour
         
     }
 
+    /**
+     * Updates the number of lives left on GUI
+     */
     private void UpdateLivesLeft()
     {
         livesLeftText.text = "Life : " + GameManager.instance.livesLeft;
+        
     }
 }
