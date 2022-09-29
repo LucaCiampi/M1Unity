@@ -40,7 +40,7 @@ public class MapManager : MonoBehaviour
             for (int j = 0; j < 11; j++)
             {
                 if (mapGrid[i, j] == 1)
-                    Instantiate(wallPrefab, new Vector3(j * 3, 0, i * -3), Quaternion.identity).GetComponent<WallManager>().preset = ( mapWallTypes[i, j] == 1 ? this.WallPreset : null) ;
+                    Instantiate(wallPrefab, new Vector3(j * 3, 0, i * -3), Quaternion.identity).GetComponent<WallController>().preset = ( mapWallTypes[i, j] == 1 ? this.WallPreset : null) ;
             }
         }
     }
