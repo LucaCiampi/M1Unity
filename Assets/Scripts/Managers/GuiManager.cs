@@ -18,8 +18,7 @@ public class GuiManager : MonoBehaviour
         }
         private set { _instance = value; }
     }
-
-    public TextMeshProUGUI livesLeftText;
+    
     public GameObject lifeLayout;
     public GameObject heartPrefab;
     public GameObject skullPrefab;
@@ -32,6 +31,7 @@ public class GuiManager : MonoBehaviour
     public delegate void GameStatusEvent();
 
     public event GameStatusEvent OnRestartButtonPressed;
+    public event GameStatusEvent OnBackToMenuButtonPressed;
 
     // Start is called before the first frame update
     void Start()
@@ -108,5 +108,12 @@ public class GuiManager : MonoBehaviour
     public void RestartButtonPressed()
     {
         this.OnRestartButtonPressed.Invoke();
+    }
+    /**
+     * The back to menu button has been clicked on
+     */
+    public void BackToMenuPressed()
+    {
+        this.OnBackToMenuButtonPressed.Invoke();
     }
 }
