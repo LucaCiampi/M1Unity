@@ -61,4 +61,13 @@ public class GameManager : MonoBehaviour
     {
         print("Game over");
     }
+
+    /**
+     * removes a living being from the game
+     * @param target : the transform component of the target
+     */
+    public void killLivingBeing(GameObject target)
+    {
+        Destroy(target);
+    }
 }
