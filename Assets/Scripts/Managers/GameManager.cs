@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,12 +19,17 @@ public class GameManager : MonoBehaviour
         }
         private set { _instance = value; }
     }
-
+    
+    // Events
+    public delegate void GameStatusEvent();
+    public event GameStatusEvent OnGameOver;
+    
     // Start is called before the first frame update
     void Start()
     {
         if (player == null) player = GameObject.FindGameObjectWithTag("Player");
         PlayerController.instance.OnPlayerGotHit += RemoveLife;
+        GuiManager.instance.OnRestartButtonPressed += RestartGame;
     }
 
     // Update is called once per frame
@@ -59,7 +65,7 @@ public class GameManager : MonoBehaviour
      */
     private void GameOver()
     {
-        print("Game over");
+        this.OnGameOver.Invoke();
     }
 
     /**
@@ -69,5 +75,13 @@ public class GameManager : MonoBehaviour
     public void killLivingBeing(GameObject target)
     {
         Destroy(target);
+    }
+
+    /**
+     * Restarts the game
+     */
+    private void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

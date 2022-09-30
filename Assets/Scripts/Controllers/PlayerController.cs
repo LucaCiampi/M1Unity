@@ -10,11 +10,12 @@ public class PlayerController : MonoBehaviour
     public LivingBeingSettings preset;
     public float rotationSpeed = 10f;
     public Camera camera;
-    public float maxHitDistance = 100f;
+    public float maxHitDistance = 1.0f;
     public Animator animator;
 
     private Vector3 _direction;
     private Vector3 _rotation;
+    private float _speed;
 
     private bool _playerInvicible = false;
 
@@ -36,9 +37,15 @@ public class PlayerController : MonoBehaviour
     public delegate void PlayerLifeEvent();
     public event PlayerLifeEvent OnPlayerGotHit;
 
+    private void Awake()
+    {
+        this._speed = preset.speed;
+    }
+
     private void Start()
     {
-        InputManager.instance.OnUserShoot += Shoot;
+        InputManager.instance.OnUserShoot += Attack;
+        GameManager.instance.OnGameOver += FreezePlayer;
     }
 
     // Update is called once per frame
@@ -46,7 +53,6 @@ public class PlayerController : MonoBehaviour
     {
         _direction = new Vector3(0, 0, Input.GetAxis("Vertical"));
         animator.SetFloat("speed", _direction.z);
-        Debug.Log(_direction.z);
 
         MovePlayer(_direction);
         RotatePlayer(Input.GetAxis("Horizontal"));
@@ -57,7 +63,7 @@ public class PlayerController : MonoBehaviour
      */
     private void MovePlayer(Vector3 direction)
     {
-        this.transform.Translate(direction * preset.speed * Time.deltaTime);
+        this.transform.Translate(direction * _speed * Time.deltaTime);
     }
     
     /**
@@ -92,17 +98,27 @@ public class PlayerController : MonoBehaviour
     }
 
     /**
-     * Simulates shooting ball trajectory
+     * Simulates the player giving a sword attack
      */
-    private void Shoot()
+    private void Attack()
     {
         RaycastHit hit;
         if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, maxHitDistance))
         {
+            Debug.Log(hit.distance);
             if (hit.transform.CompareTag("Enemy"))
             {
                 GameManager.instance.killLivingBeing(hit.transform.gameObject);
             }
         }
+    }
+
+    /**
+     * Prevents the player from moving
+     */
+    private void FreezePlayer()
+    {
+        this._speed = 0;
+        this.rotationSpeed = 0;
     }
 }
