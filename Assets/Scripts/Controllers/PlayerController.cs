@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public LivingBeingSettings preset;
     public float rotationSpeed = 10f;
-    public Camera camera;
+    public new Camera camera;
     public float maxHitDistance = 3.0f;
     public Animator animator;
     public BoxCollider swordBoxCollider;
