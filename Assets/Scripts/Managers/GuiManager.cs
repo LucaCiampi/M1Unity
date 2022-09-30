@@ -38,6 +38,7 @@ public class GuiManager : MonoBehaviour
     void Start()
     {
         PlayerController.instance.OnPlayerGotHit += UpdateLivesLeft;
+        PlayerController.instance.OnPlayerGotHealth += UpdateLivesLeft;
         GameManager.instance.OnGameOver += DisplayYouDiedGameOver;
     }
 
