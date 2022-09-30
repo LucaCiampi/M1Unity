@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,13 +24,18 @@ public class GameManager : MonoBehaviour
     // Events
     public delegate void GameStatusEvent();
     public event GameStatusEvent OnGameOver;
-    
+
+    private void OnEnable()
+    {
+        PlayerController.instance.OnPlayerGotHit += RemoveLife;
+        GuiManager.instance.OnRestartButtonPressed += RestartGame;
+        GuiManager.instance.OnBackToMenuButtonPressed += BackToMenu;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         if (player == null) player = GameObject.FindGameObjectWithTag("Player");
-        PlayerController.instance.OnPlayerGotHit += RemoveLife;
-        GuiManager.instance.OnRestartButtonPressed += RestartGame;
         GuiManager.instance.UpdateLivesLeft();
     }
 
@@ -84,5 +90,14 @@ public class GameManager : MonoBehaviour
     private void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    /**
+     * Goes back to level selection
+     */
+    private void BackToMenu()
+    {
+        print("back to menu");
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
