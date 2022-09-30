@@ -3116,7 +3116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61810651ac42a4b5b99cd685d9bd319e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  livesLeft: 0
+  livesLeft: 3
   player: {fileID: 743161800}
   enemiesPrefab:
   - {fileID: 3412280263891656710, guid: 3cb28e72da0b741fe813f017541dc377, type: 3}
