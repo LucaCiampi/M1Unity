@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("Amount of lives left")] public byte livesLeft = 3;
     public GameObject player;
     public GameObject[] enemiesPrefab;
-    public GameObject enemy;
+    [HideInInspector] public List<Vector3> enemiesSpawners;
 
     private static GameManager _instance = null;
 
@@ -24,9 +24,10 @@ public class GameManager : MonoBehaviour
         }
         private set { _instance = value; }
     }
-    
+
     // Events
     public delegate void GameStatusEvent();
+
     public event GameStatusEvent OnGameOver;
 
     private void OnEnable()
@@ -121,6 +122,15 @@ public class GameManager : MonoBehaviour
     {
         Random rnd = new Random();
         int randomEnemyIndex = rnd.Next(0, enemiesPrefab.Length);
-        Instantiate(enemiesPrefab[randomEnemyIndex].gameObject);
+        if (enemiesSpawners.Count > 0)
+        {
+            int randomEnemySpawner = rnd.Next(0, enemiesSpawners.Count);
+            Instantiate(enemiesPrefab[randomEnemyIndex].gameObject).transform.position =
+                enemiesSpawners[randomEnemySpawner];
+        }
+        else
+        {
+            Instantiate(enemiesPrefab[randomEnemyIndex].gameObject).transform.position = new Vector3(10, 3, -20);
+        }
     }
 }
