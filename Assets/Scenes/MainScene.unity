@@ -2220,6 +2220,7 @@ MonoBehaviour:
   rotationSpeed: 100
   camera: {fileID: 963194227}
   maxHitDistance: 100
+  animator: {fileID: 1345680822}
 --- !u!4 &1055482669
 Transform:
   m_ObjectHideFlags: 0
@@ -2604,6 +2605,11 @@ Transform:
 --- !u!4 &1345680821 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+  m_PrefabInstance: {fileID: 243979227}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1345680822 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4540229000190281644, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
   m_PrefabInstance: {fileID: 243979227}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1365431328

@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 10f;
     public Camera camera;
     public float maxHitDistance = 100f;
+    public Animator animator;
 
     private Vector3 _direction;
     private Vector3 _rotation;
@@ -44,6 +45,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         _direction = new Vector3(0, 0, Input.GetAxis("Vertical"));
+        animator.SetFloat("speed", _direction.z);
+        Debug.Log(_direction.z);
 
         MovePlayer(_direction);
         RotatePlayer(Input.GetAxis("Horizontal"));
