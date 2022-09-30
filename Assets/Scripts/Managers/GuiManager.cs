@@ -27,11 +27,17 @@ public class GuiManager : MonoBehaviour
     public GameObject levelSelector;
     public Button[] levelsButtons;
     public GameObject backButton;
+    public GameObject youDiedPanel;
+    
+    // Events
+    public delegate void GameStatusEvent();
+    public event GameStatusEvent OnRestartButtonPressed;
     
     // Start is called before the first frame update
     void Start()
     {
         PlayerController.instance.OnPlayerGotHit += UpdateLivesLeft;
+        GameManager.instance.OnGameOver += DisplayYouDiedGameOver;
     }
 
     // Update is called once per frame
@@ -60,6 +66,7 @@ public class GuiManager : MonoBehaviour
         levelSelector.SetActive(true);
         backButton.SetActive(false);
     }
+    
     private void HideMenu(int levelId)
     {
         levelSelector.SetActive(false);
@@ -72,5 +79,20 @@ public class GuiManager : MonoBehaviour
         {
             levelsButtons[i].interactable = LevelManager.Instance.LevelClearance >= i ? true : false;
         }
+    }
+    /**
+     * Displays the "You died" game over panel on player death
+     */
+    private void DisplayYouDiedGameOver()
+    {
+        youDiedPanel.SetActive(true);
+    }
+
+    /**
+     * The restart button has been clicked on
+     */
+    public void RestartButtonPressed()
+    {
+        this.OnRestartButtonPressed.Invoke();
     }
 }

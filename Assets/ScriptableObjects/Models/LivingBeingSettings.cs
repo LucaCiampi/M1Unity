@@ -7,4 +7,5 @@ public class LivingBeingSettings : ScriptableObject
 {
     public float speed = 1.0f;
     public bool killOnTouch = false;
+    public byte health = 1;
 }
