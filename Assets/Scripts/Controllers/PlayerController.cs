@@ -10,8 +10,10 @@ public class PlayerController : MonoBehaviour
     public LivingBeingSettings preset;
     public float rotationSpeed = 10f;
     public Camera camera;
-    public float maxHitDistance = 1.0f;
+    public float maxHitDistance = 3.0f;
     public Animator animator;
+    public BoxCollider swordBoxCollider;
+    public Animation swordAttackAnimation;
 
     private Vector3 _direction;
     private Vector3 _rotation;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private bool _playerInvicible = false;
 
     private static PlayerController _instance = null;
+
     public static PlayerController instance
     {
         get
@@ -27,14 +30,12 @@ public class PlayerController : MonoBehaviour
             if (!_instance) _instance = FindObjectOfType<PlayerController>();
             return _instance;
         }
-        private set
-        {
-            _instance = value;
-        }
+        private set { _instance = value; }
     }
-    
+
     // Events
     public delegate void PlayerLifeEvent();
+
     public event PlayerLifeEvent OnPlayerGotHit;
     public delegate void HasWin();
     public event HasWin OnHasWin;
@@ -67,7 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         this.transform.Translate(direction * _speed * Time.deltaTime);
     }
-    
+
     /**
      * Rotates the player
      */
@@ -75,7 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         this.transform.Rotate(0, rotation * rotationSpeed * Time.deltaTime, 0);
     }
-    
+
     /**
      * Detects collision
      */
@@ -108,12 +109,13 @@ public class PlayerController : MonoBehaviour
      */
     private void Attack()
     {
+        swordAttackAnimation.Play();
         RaycastHit hit;
         if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, maxHitDistance))
         {
-            Debug.Log(hit.distance);
             if (hit.transform.CompareTag("Enemy"))
             {
+                // if (swordBoxCollider.)
                 GameManager.instance.killLivingBeing(hit.transform.gameObject);
             }
         }
