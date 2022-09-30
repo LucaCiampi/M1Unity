@@ -1871,10 +1871,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1744385879f4a4b9894495fecbbef225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseXSensitivity: 100
-  mouseYSensitivity: 100
-  camera: {fileID: 963194227}
-  xRotation: 0
 --- !u!1001 &971612469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2222,6 +2218,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preset: {fileID: 11400000, guid: 98954f77584d241e6bb5f2cfb5dab6d3, type: 2}
   rotationSpeed: 100
+  camera: {fileID: 963194227}
+  maxHitDistance: 100
 --- !u!4 &1055482669
 Transform:
   m_ObjectHideFlags: 0
@@ -3449,7 +3447,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   livesLeftText: {fileID: 531751982}
+  lifeLayout: {fileID: 0}
   lifeHeartSprite: {fileID: 0}
+  levelSelector: {fileID: 0}
+  backButton: {fileID: 0}
 --- !u!1001 &1897225191
 PrefabInstance:
   m_ObjectHideFlags: 0

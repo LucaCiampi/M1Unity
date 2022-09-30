@@ -2,12 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Schema;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public LivingBeingSettings preset;
     public float rotationSpeed = 10f;
+    public Camera camera;
+    public float maxHitDistance = 100f;
 
     private Vector3 _direction;
     private Vector3 _rotation;
@@ -34,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        InputManager.instance.OnUserShoot += Shoot;
     }
 
     // Update is called once per frame
@@ -82,5 +86,20 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         this._playerInvicible = false;
+    }
+
+    /**
+     * Simulates shooting ball trajectory
+     */
+    private void Shoot()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, maxHitDistance))
+        {
+            if (hit.transform.CompareTag("Enemy"))
+            {
+                GameManager.instance.killLivingBeing(hit.transform.gameObject);
+            }
+        }
     }
 }
