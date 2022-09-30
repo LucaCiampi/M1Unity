@@ -1,13 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = System.Random;
 
 public class GameManager : MonoBehaviour
 {
     [Tooltip("Amount of lives left")] public byte livesLeft = 3;
     public GameObject player;
+    public GameObject[] enemiesPrefab;
+    public GameObject enemy;
 
     private static GameManager _instance = null;
 
@@ -38,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         if (player == null) player = GameObject.FindGameObjectWithTag("Player");
         GuiManager.instance.UpdateLivesLeft();
+        InvokeRepeating("SpawnEnemy", 0f, 5.0f);
     }
 
     // Update is called once per frame
@@ -107,5 +112,15 @@ public class GameManager : MonoBehaviour
     private void SetPlayerPositionToMazeEntrance(int levelID)
     {
         player.transform.position = new Vector3(15, 1, -35);
+    }
+
+    /**
+     * Instantiates an enemy within the array of enemies passed
+     */
+    public void SpawnEnemy()
+    {
+        Random rnd = new Random();
+        int randomEnemyIndex = rnd.Next(0, enemiesPrefab.Length);
+        Instantiate(enemiesPrefab[randomEnemyIndex].gameObject);
     }
 }
