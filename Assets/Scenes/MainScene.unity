@@ -1590,11 +1590,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preset: {fileID: 11400000, guid: 98954f77584d241e6bb5f2cfb5dab6d3, type: 2}
-  rotationSpeed: 100
   camera: {fileID: 1524601815}
-  maxHitDistance: 3
   animator: {fileID: 249717607}
-  swordBoxCollider: {fileID: 0}
   swordAttackAnimation: {fileID: 248996157}
 --- !u!4 &743161805
 Transform:
@@ -3119,7 +3116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61810651ac42a4b5b99cd685d9bd319e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  livesLeft: 3
+  livesLeft: 0
   player: {fileID: 743161800}
   enemiesPrefab:
   - {fileID: 3412280263891656710, guid: 3cb28e72da0b741fe813f017541dc377, type: 3}
@@ -3473,7 +3470,6 @@ GameObject:
   - component: {fileID: 1524601812}
   - component: {fileID: 1524601815}
   - component: {fileID: 1524601814}
-  - component: {fileID: 1524601813}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3498,18 +3494,6 @@ Transform:
   m_Father: {fileID: 743161805}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1524601813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524601811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1744385879f4a4b9894495fecbbef225, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!81 &1524601814
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4291,7 +4275,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 154945ad327a8074e9f7b4abfca72f13, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

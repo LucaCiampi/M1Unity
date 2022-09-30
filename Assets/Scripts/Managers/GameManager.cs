@@ -8,7 +8,7 @@ using Random = System.Random;
 
 public class GameManager : MonoBehaviour
 {
-    [Tooltip("Amount of lives left")] public byte livesLeft = 3;
+    [Tooltip("Amount of lives left")] public byte livesLeft;
     public GameObject player;
     public GameObject[] enemiesPrefab;
     [HideInInspector] public List<Vector3> enemiesSpawners;
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     {
         if (player == null) player = GameObject.FindGameObjectWithTag("Player");
         GuiManager.instance.UpdateLivesLeft();
+        livesLeft = PlayerController.instance.preset.health;
     }
 
     // Update is called once per frame
@@ -115,6 +116,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(enemy);
         }
+
+        livesLeft = 3;
         InvokeRepeating("SpawnEnemy", 0f, 5.0f);
         SetPlayerPositionToMazeEntrance(levelId);
     }

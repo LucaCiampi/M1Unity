@@ -8,11 +8,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public LivingBeingSettings preset;
-    public float rotationSpeed = 10f;
+
+    public float rotationSpeed
+    {
+        get => preset.rotationSpeed;
+        set => this.rotationSpeed = value;
+    }
+    
     public new Camera camera;
-    public float maxHitDistance = 3.0f;
+
+    public float maxHitDistance
+    {
+        get => preset.maxHitDistance;
+        set => this.maxHitDistance = value;
+    }
     public Animator animator;
-    public BoxCollider swordBoxCollider;
     public Animation swordAttackAnimation;
 
     private Vector3 _direction;
@@ -116,7 +126,6 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.transform.CompareTag("Enemy"))
             {
-                // if (swordBoxCollider.)
                 GameManager.instance.killLivingBeing(hit.transform.gameObject);
             }
         }

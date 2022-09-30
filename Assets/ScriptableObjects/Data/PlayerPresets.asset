@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: PlayerPresets
   m_EditorClassIdentifier: 
   speed: 6
+  rotationSpeed: 140
+  maxHitDistance: 3
   killOnTouch: 0
-  health: 1
+  health: 4
