@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         PlayerController.instance.OnPlayerGotHit += RemoveLife;
         GuiManager.instance.OnRestartButtonPressed += RestartGame;
         GuiManager.instance.OnBackToMenuButtonPressed += BackToMenu;
-        LevelManager.Instance.OnLevelLaunch += SetPlayerPositionToMazeEntrance;
+        LevelManager.Instance.OnLevelLaunch += StartLevel;
     }
 
     // Start is called before the first frame update
@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
     {
         if (player == null) player = GameObject.FindGameObjectWithTag("Player");
         GuiManager.instance.UpdateLivesLeft();
-        InvokeRepeating("SpawnEnemy", 0f, 5.0f);
     }
 
     // Update is called once per frame
@@ -105,6 +104,19 @@ public class GameManager : MonoBehaviour
     private void BackToMenu()
     {
         LevelManager.Instance.ResetLevel();
+    }
+
+    /**
+     * The level has started
+     */
+    private void StartLevel(int levelId)
+    {
+        foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            Destroy(enemy);
+        }
+        InvokeRepeating("SpawnEnemy", 0f, 5.0f);
+        SetPlayerPositionToMazeEntrance(levelId);
     }
 
     /**
