@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     public delegate void PlayerLifeEvent();
 
     public event PlayerLifeEvent OnPlayerGotHit;
+    public delegate void HasWin();
+    public event HasWin OnHasWin;
 
     private void Awake()
     {
@@ -86,6 +88,10 @@ public class PlayerController : MonoBehaviour
             _playerInvicible = true;
             print("player got hit");
             StartCoroutine(PlayerInvicibilityTime());
+        }
+        if (collision.transform.tag == "Treasure")
+        {
+            this.OnHasWin.Invoke();
         }
     }
 

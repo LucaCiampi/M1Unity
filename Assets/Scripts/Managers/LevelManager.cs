@@ -48,6 +48,11 @@ public class LevelManager : MonoBehaviour
         
     }
 
+    void OnEnable()
+    {
+        PlayerController.instance.OnHasWin += WinLevel;
+    }
+
     public void OnLaunchLevel1() { this.LaunchLevel(1); }
     public void OnLaunchLevel2() { this.LaunchLevel(2); }
     public void OnLaunchLevel3() { this.LaunchLevel(3); }
@@ -57,6 +62,10 @@ public class LevelManager : MonoBehaviour
         this.OnLevelLaunch.Invoke(levelId);
     }
     public void ResetLevel()
+    {
+        this.OnLevelReset.Invoke();
+    }
+    private void WinLevel()
     {
         LevelClearance += 1;
         this.OnLevelReset.Invoke();
