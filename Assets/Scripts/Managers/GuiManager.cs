@@ -7,6 +7,7 @@ using UnityEngine;
 public class GuiManager : MonoBehaviour
 {
     private static GuiManager _instance = null;
+
     public static GuiManager instance
     {
         get
@@ -14,23 +15,22 @@ public class GuiManager : MonoBehaviour
             if (!_instance) _instance = FindObjectOfType<GuiManager>();
             return _instance;
         }
-        private set
-        {
-            _instance = value;
-        }
+        private set { _instance = value; }
     }
 
     public TextMeshProUGUI livesLeftText;
     public GameObject lifeLayout;
-    public Sprite lifeHeartSprite;
+    public GameObject heartPrefab;
+    public GameObject skullPrefab;
     public GameObject levelSelector;
     public GameObject backButton;
     public GameObject youDiedPanel;
-    
+
     // Events
     public delegate void GameStatusEvent();
+
     public event GameStatusEvent OnRestartButtonPressed;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +41,6 @@ public class GuiManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     void OnEnable()
@@ -53,9 +52,24 @@ public class GuiManager : MonoBehaviour
     /**
      * Updates the number of lives left on GUI
      */
-    private void UpdateLivesLeft()
+    public void UpdateLivesLeft()
     {
-        livesLeftText.text = "Life : " + GameManager.instance.livesLeft;
+        foreach (Transform child in lifeLayout.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        if (GameManager.instance.livesLeft > 0)
+        {
+            for (int i = 1; i <= GameManager.instance.livesLeft; i++)
+            {
+                GameObject.Instantiate(heartPrefab).transform.SetParent(lifeLayout.transform);;
+            }
+        }
+        else
+        {
+            GameObject.Instantiate(skullPrefab).transform.SetParent(lifeLayout.transform);
+        }
     }
 
     private void DisplayMenu()
@@ -63,7 +77,7 @@ public class GuiManager : MonoBehaviour
         levelSelector.SetActive(true);
         backButton.SetActive(false);
     }
-    
+
     private void HideMenu(int levelId)
     {
         levelSelector.SetActive(false);

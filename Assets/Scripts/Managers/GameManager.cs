@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         if (player == null) player = GameObject.FindGameObjectWithTag("Player");
         PlayerController.instance.OnPlayerGotHit += RemoveLife;
         GuiManager.instance.OnRestartButtonPressed += RestartGame;
+        GuiManager.instance.UpdateLivesLeft();
     }
 
     // Update is called once per frame
