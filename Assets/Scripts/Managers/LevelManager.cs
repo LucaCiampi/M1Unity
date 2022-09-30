@@ -61,13 +61,14 @@ public class LevelManager : MonoBehaviour
     {
         this.OnLevelLaunch.Invoke(levelId);
     }
+    
     public void ResetLevel()
     {
         this.OnLevelReset.Invoke();
     }
-    private void WinLevel()
+    
+    public void WinLevel()
     {
         LevelClearance += 1;
-        this.OnLevelReset.Invoke();
     }
 }

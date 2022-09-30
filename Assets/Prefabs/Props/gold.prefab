@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2608916002658728362}
   m_Layer: 0
   m_Name: gold_001
-  m_TagString: Untagged
+  m_TagString: Treasure
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 95643549688268718}
   m_Layer: 0
   m_Name: gold
-  m_TagString: Collectible
+  m_TagString: Treasure
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -26,6 +26,7 @@ public class GuiManager : MonoBehaviour
     public Button[] levelsButtons;
     public GameObject backButton;
     public GameObject youDiedPanel;
+    public GameObject youWonPanel;
 
     // Events
     public delegate void GameStatusEvent();
@@ -50,6 +51,7 @@ public class GuiManager : MonoBehaviour
         LevelManager.Instance.OnLevelLaunch += HideMenu;
         LevelManager.Instance.OnLevelReset += DisplayMenu;
         LevelManager._Instance.OnUpdateLevelClearance += RefreshLevelButtons;
+        PlayerController.instance.OnHasWin += DisplayYouWonPanel;
     }
 
     /**
@@ -108,12 +110,28 @@ public class GuiManager : MonoBehaviour
     public void RestartButtonPressed()
     {
         this.OnRestartButtonPressed.Invoke();
+        HideAllUIPanels();
     }
     /**
      * The back to menu button has been clicked on
      */
-    public void BackToMenuPressed()
+    public void NextLevelButtonPressed()
     {
         this.OnBackToMenuButtonPressed.Invoke();
+        HideAllUIPanels();
+    }
+
+    /**
+     * Displays the "You escaped" panel when player finishes the maze
+     */
+    private void DisplayYouWonPanel()
+    {
+        this.youWonPanel.SetActive(true);
+    }
+
+    public void HideAllUIPanels()
+    {
+        this.youDiedPanel.SetActive(false);
+        this.youWonPanel.SetActive(false);
     }
 }

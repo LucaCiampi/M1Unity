@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
             print("player got hit");
             StartCoroutine(PlayerInvicibilityTime());
         }
+        
         if (collision.transform.tag == "Treasure")
         {
             this.OnHasWin.Invoke();

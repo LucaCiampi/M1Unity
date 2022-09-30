@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         PlayerController.instance.OnPlayerGotHit += RemoveLife;
         GuiManager.instance.OnRestartButtonPressed += RestartGame;
         GuiManager.instance.OnBackToMenuButtonPressed += BackToMenu;
+        LevelManager.Instance.OnLevelLaunch += SetPlayerPositionToMazeEntrance;
     }
 
     // Start is called before the first frame update
@@ -97,7 +98,14 @@ public class GameManager : MonoBehaviour
      */
     private void BackToMenu()
     {
-        print("back to menu");
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        LevelManager.Instance.ResetLevel();
+    }
+
+    /**
+     * Sets the player position to 0,0
+     */
+    private void SetPlayerPositionToMazeEntrance(int levelID)
+    {
+        player.transform.position = new Vector3(15, 1, -35);
     }
 }
