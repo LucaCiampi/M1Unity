@@ -10,8 +10,9 @@ public class PlayerController : MonoBehaviour
     public LivingBeingSettings preset;
     public float rotationSpeed = 10f;
     public Camera camera;
-    public float maxHitDistance = 1.0f;
+    public float maxHitDistance = 3.0f;
     public Animator animator;
+    public BoxCollider swordBoxCollider;
     public Animation swordAttackAnimation;
 
     private Vector3 _direction;
@@ -108,6 +109,7 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.transform.CompareTag("Enemy"))
             {
+                // if (swordBoxCollider.)
                 GameManager.instance.killLivingBeing(hit.transform.gameObject);
             }
         }

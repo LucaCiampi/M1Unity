@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7304dcfea1c794c04bb352ceee22f408, type: 3}
   m_Name: SkeletonPreset
   m_EditorClassIdentifier: 
-  speed: 0.4
+  speed: 3.5
   killOnTouch: 1
   health: 1
