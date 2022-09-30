@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GuiManager : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class GuiManager : MonoBehaviour
     public GameObject heartPrefab;
     public GameObject skullPrefab;
     public GameObject levelSelector;
+    public Button[] levelsButtons;
     public GameObject backButton;
     public GameObject youDiedPanel;
 
@@ -47,6 +49,7 @@ public class GuiManager : MonoBehaviour
     {
         LevelManager.Instance.OnLevelLaunch += HideMenu;
         LevelManager.Instance.OnLevelReset += DisplayMenu;
+        LevelManager._Instance.OnUpdateLevelClearance += RefreshLevelButtons;
     }
 
     /**
@@ -84,6 +87,13 @@ public class GuiManager : MonoBehaviour
         backButton.SetActive(true);
     }
 
+    private void RefreshLevelButtons()
+    {
+        for (int i = 0; i < levelsButtons.Length; i++)
+        {
+            levelsButtons[i].interactable = LevelManager.Instance.LevelClearance >= i ? true : false;
+        }
+    }
     /**
      * Displays the "You died" game over panel on player death
      */

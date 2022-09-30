@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 737024f24a4498b4ea58a67c1667a3db, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.16037136, g: 0.10995286, b: 0.15011346, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -156,6 +156,10 @@ MonoBehaviour:
   lifeLayout: {fileID: 0}
   lifeHeartSprite: {fileID: 0}
   levelSelector: {fileID: 1993413432}
+  levelsButtons:
+  - {fileID: 1997941874}
+  - {fileID: 1276324828}
+  - {fileID: 1890940320}
   backButton: {fileID: 1231886897}
 --- !u!4 &315702640
 Transform:
@@ -358,6 +362,7 @@ MonoBehaviour:
   WallPreset1: {fileID: 11400000, guid: b5793835bfa64d94e816fc19c4200041, type: 2}
   WallPreset2: {fileID: 11400000, guid: e43c066b8ff4da240990d253b6ef2d0b, type: 2}
   MazeContainer: {fileID: 1634175036}
+  treasurePrefab: {fileID: 1594879466734162, guid: c82411508e9628b4e9f629bf2800542f, type: 3}
 --- !u!4 &644445767
 Transform:
   m_ObjectHideFlags: 0
@@ -1140,7 +1145,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1276324829}
   m_OnClick:
     m_PersistentCalls:
@@ -2114,7 +2119,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 350, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1768514796
@@ -2351,7 +2356,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1890940321}
   m_OnClick:
     m_PersistentCalls:
@@ -2606,7 +2611,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1997941875}
   m_OnClick:
     m_PersistentCalls:

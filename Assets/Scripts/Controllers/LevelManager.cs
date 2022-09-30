@@ -18,14 +18,28 @@ public class LevelManager : MonoBehaviour
             _Instance = value;
         }
     }
+    private int _levelClearance = 0;
+    public int LevelClearance
+    {
+        get => _levelClearance; 
+        set
+        {
+            this._levelClearance = value;
+            this.OnUpdateLevelClearance.Invoke();
+        }
+    }
+
+    //events
     public delegate void LevelLaunch(int levelId);
     public event LevelLaunch OnLevelLaunch;
     public delegate void LevelReset();
     public event LevelReset OnLevelReset;
+    public delegate void UpdateLevelClearance();
+    public event UpdateLevelClearance OnUpdateLevelClearance;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -34,21 +48,9 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    public void OnLaunchLevel1()
-    {
-        Debug.Log("launching 1 ...");
-        this.LaunchLevel(1);
-    }
-    public void OnLaunchLevel2()
-    {
-        Debug.Log("launching 2 ...");
-        this.LaunchLevel(2);
-    }
-    public void OnLaunchLevel3()
-    {
-        Debug.Log("launching 3 ...");
-        this.LaunchLevel(3);
-    }
+    public void OnLaunchLevel1() { this.LaunchLevel(1); }
+    public void OnLaunchLevel2() { this.LaunchLevel(2); }
+    public void OnLaunchLevel3() { this.LaunchLevel(3); }
 
     public void LaunchLevel(int levelId)
     {
@@ -56,6 +58,7 @@ public class LevelManager : MonoBehaviour
     }
     public void ResetLevel()
     {
+        LevelClearance += 1;
         this.OnLevelReset.Invoke();
     }
 }
