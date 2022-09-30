@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
         get => preset.maxHitDistance;
         set => this.maxHitDistance = value;
     }
-    public Animator animator;
     public Animation swordAttackAnimation;
 
     private Vector3 _direction;
@@ -65,7 +64,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         _direction = new Vector3(0, 0, Input.GetAxis("Vertical"));
-        animator.SetFloat("speed", _direction.z);
+        // animator.SetFloat("speed", _direction.z);
 
         MovePlayer(_direction);
         RotatePlayer(Input.GetAxis("Horizontal"));
@@ -96,7 +95,6 @@ public class PlayerController : MonoBehaviour
         {
             this.OnPlayerGotHit.Invoke();
             _playerInvicible = true;
-            print("player got hit");
             StartCoroutine(PlayerInvicibilityTime());
         }
         

@@ -129,7 +129,7 @@ public class MapManager : MonoBehaviour
                 if (mapGrid[levelId - 1, i, j] == 4)//treasure
                 {
                     GameObject treasureInstance;
-                    treasureInstance = Instantiate(treasurePrefab, new Vector3(j * 3, 1.5f, i * -3), Quaternion.identity);
+                    treasureInstance = Instantiate(treasurePrefab, new Vector3(j * 3, 1f, i * -3), Quaternion.identity);
                     treasureInstance.transform.SetParent(MazeContainer.transform);
                 }
             }

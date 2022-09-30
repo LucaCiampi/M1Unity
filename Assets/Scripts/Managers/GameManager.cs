@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
     private void SetPlayerPositionToMazeEntrance(int levelID)
     {
         player.transform.position = new Vector3(15, 1, -35);
+        player.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     /**
