@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GuiManager : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class GuiManager : MonoBehaviour
     public GameObject lifeLayout;
     public Sprite lifeHeartSprite;
     public GameObject levelSelector;
+    public Button[] levelsButtons;
     public GameObject backButton;
     
     // Start is called before the first frame update
@@ -35,13 +37,14 @@ public class GuiManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+                
     }
 
     void OnEnable()
     {
         LevelManager.Instance.OnLevelLaunch += HideMenu;
         LevelManager.Instance.OnLevelReset += DisplayMenu;
+        LevelManager._Instance.OnUpdateLevelClearance += RefreshLevelButtons;
     }
 
     /**
@@ -61,5 +64,13 @@ public class GuiManager : MonoBehaviour
     {
         levelSelector.SetActive(false);
         backButton.SetActive(true);
+    }
+
+    private void RefreshLevelButtons()
+    {
+        for (int i = 0; i < levelsButtons.Length; i++)
+        {
+            levelsButtons[i].interactable = LevelManager.Instance.LevelClearance >= i ? true : false;
+        }
     }
 }
