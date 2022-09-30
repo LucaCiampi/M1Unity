@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject[] enemiesPrefab;
     [HideInInspector] public List<Vector3> enemiesSpawners;
+    public GameObject healthPotionPrefab;
 
     private static GameManager _instance = null;
 
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         PlayerController.instance.OnPlayerGotHit += RemoveLife;
+        PlayerController.instance.OnPlayerGotHealth += AddLife;
         GuiManager.instance.OnRestartButtonPressed += RestartGame;
         GuiManager.instance.OnBackToMenuButtonPressed += BackToMenu;
         LevelManager.Instance.OnLevelLaunch += StartLevel;
@@ -62,6 +64,17 @@ public class GameManager : MonoBehaviour
             checkForGameOver();
         }
     }
+    
+    /**
+     * Adds a life to the player
+     */
+    public void AddLife()
+    {
+        if (livesLeft > 0)
+        {
+            livesLeft += 1;
+        }
+    }
 
     /**
      * Checks if the player is dead
@@ -88,6 +101,13 @@ public class GameManager : MonoBehaviour
      */
     public void killLivingBeing(GameObject target)
     {
+        Random rnd = new Random();
+        int chanceDroppingHealth = rnd.Next(1, 4);
+        if (chanceDroppingHealth == 1)
+        {
+            Instantiate(healthPotionPrefab).transform.position = target.transform.position;
+        }
+
         Destroy(target);
     }
 
@@ -137,6 +157,7 @@ public class GameManager : MonoBehaviour
     public void SpawnEnemy()
     {
         Random rnd = new Random();
+        
         int randomEnemyIndex = rnd.Next(0, enemiesPrefab.Length);
         if (enemiesSpawners.Count > 0)
         {

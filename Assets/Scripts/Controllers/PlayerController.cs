@@ -9,19 +9,15 @@ public class PlayerController : MonoBehaviour
 {
     public LivingBeingSettings preset;
 
-    public float rotationSpeed
-    {
-        get => preset.rotationSpeed;
-        set => this.rotationSpeed = value;
-    }
-    
+    private float _rotationSpeed;
+
     public new Camera camera;
 
     public float maxHitDistance
     {
         get => preset.maxHitDistance;
-        set => this.maxHitDistance = value;
     }
+
     public Animation swordAttackAnimation;
 
     private Vector3 _direction;
@@ -46,12 +42,16 @@ public class PlayerController : MonoBehaviour
     public delegate void PlayerLifeEvent();
 
     public event PlayerLifeEvent OnPlayerGotHit;
+    public event PlayerLifeEvent OnPlayerGotHealth;
+
     public delegate void HasWin();
+
     public event HasWin OnHasWin;
 
     private void Awake()
     {
         this._speed = preset.speed;
+        this._rotationSpeed = preset.rotationSpeed;
     }
 
     private void Start()
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
      */
     private void RotatePlayer(float rotation)
     {
-        this.transform.Rotate(0, rotation * rotationSpeed * Time.deltaTime, 0);
+        this.transform.Rotate(0, rotation * _rotationSpeed * Time.deltaTime, 0);
     }
 
     /**
@@ -91,16 +91,22 @@ public class PlayerController : MonoBehaviour
      */
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Enemy" && !_playerInvicible)
+        if (collision.transform.CompareTag("Enemy") && !_playerInvicible)
         {
             this.OnPlayerGotHit.Invoke();
             _playerInvicible = true;
             StartCoroutine(PlayerInvicibilityTime());
         }
-        
-        if (collision.transform.tag == "Treasure")
+
+        else if (collision.transform.CompareTag("Treasure"))
         {
             this.OnHasWin.Invoke();
+        }
+        
+        else if (collision.transform.CompareTag("Collectible"))
+        {
+            this.OnPlayerGotHealth.Invoke();
+            Destroy(collision.gameObject); 
         }
     }
 
@@ -135,6 +141,6 @@ public class PlayerController : MonoBehaviour
     private void FreezePlayer()
     {
         this._speed = 0;
-        this.rotationSpeed = 0;
+        this._rotationSpeed = 0;
     }
 }
